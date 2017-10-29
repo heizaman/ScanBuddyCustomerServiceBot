@@ -1,7 +1,7 @@
 var builder = require('botbuilder');
 
 
-const library = new builder.Library('getContact');
+const library = new builder.Library('getHelp');
 
 
 var TouchPad = 'TouchPad not working';
@@ -21,13 +21,22 @@ library.dialog('/', [
         if (result.response) {
             switch (result.response.entity) {
                 case TouchPad:
-                    session.beginDialog('touchpad:/');
+                    session.send(`You can try the following steps. If they don't work, please register a complaint.`);
+                        session.send(`1. Please install the latest driver using Dell Driver Utility.`);
+                        session.send(`2. Please try restarting your laptop.`);
+                        session.endDialog('Thank You');
                     break;
                 case Speed:
-                    session.beginDialog('speed:/', info);
+                    session.send(`You can try the following steps. If they don't work, please register a complaint.`);
+                    session.send(`1. Please stop any useless apps using task manager.`);
+                    session.send(`2. Please clean the temporary files folder.`);
+                    session.endDialog('Thank You');
                     break;
                 case LaptopToTV:
-                    session.beginDialog('laptoptotv:/');
+                    session.send(`You can try the following steps. If they don't work, please register a complaint.`);
+                    session.send(`1. Please make sure your HDMI cable is tightly connected.`);
+                    session.send(`2. Please make sure your TV is compatible for the connection.`);
+                    session.endDialog('Thank You');
                     break;
                 case ExitHelp:
                     session.endDialog('Exited Help');
@@ -40,37 +49,6 @@ library.dialog('/', [
             session.send(`I am sorry but I didn't understand that. I need you to select one of the options below.`);
             session.reset();
         }
-    }
-]).cancelAction('cancel', null, { matches: /^cancel/i });
-
-
-library.dialog('/touchpad', [
-    function (session) {
-        session.send(`You can try the following steps. If they don't work, please register a complaint.`);
-        session.send(`1. Please install the latest driver using Dell Driver Utility.`);
-        session.send(`2. Please try restarting your laptop.`);
-        session.endDialog('Thank You');
-    }
-]).cancelAction('cancel', null, { matches: /^cancel/i });
-
-
-library.dialog('/speed', [
-    function (session) {
-        session.send(`You can try the following steps. If they don't work, please register a complaint.`);
-        session.send(`1. Please stop any useless apps using task manager.`);
-        session.send(`2. Please clean the temporary files folder.`);
-        session.endDialog('Thank You');
-    }
-]).cancelAction('cancel', null, { matches: /^cancel/i });
-
-
-
-library.dialog('/laptoptotv', [
-    function (session) {
-        session.send(`You can try the following steps. If they don't work, please register a complaint.`);
-        session.send(`1. Please make sure your HDMI cable is tightly connected.`);
-        session.send(`2. Please make sure your TV is compatible for the connection.`);
-        session.endDialog('Thank You');
     }
 ]).cancelAction('cancel', null, { matches: /^cancel/i });
 
